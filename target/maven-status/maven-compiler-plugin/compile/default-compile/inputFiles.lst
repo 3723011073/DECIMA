@@ -1,11 +1,14 @@
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\config\CustomUserDetailsService.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\config\SecurityConfig.java
+D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\config\SystemAdminInitializer.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\controller\AuthController.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\controller\UserAuthController.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\APIResponseDTO.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\AuthRequestDTO.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\AuthResponseDTO.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\CustomerDTO.java
+D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\LoginRequest.java
+D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\LoginResponse.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\PredictionResponseDTO.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\RefreshTokenRequestDTO.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\dto\RegisterRequestDTO.java
@@ -36,6 +39,8 @@ D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\repo
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\repository\RetrainingLogRepository.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\repository\UploadedDatasetRepository.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\repository\UserRepository.java
+D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\security\JwtAuthenticationEntryPoint.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\security\JwtAuthenticationFilter.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\security\JwtUtil.java
+D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\service\AuthService.java
 D:\DECIMA\marketing-analytics-backend\src\main\java\com\marketing\analytics\service\UserService.java

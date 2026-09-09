@@ -1,0 +1,1 @@
+ALTER TABLE model_metrics RENAME COLUMN f1_score TO f1score;
