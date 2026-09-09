@@ -1,0 +1,12 @@
+ALTER TABLE users ALTER COLUMN user_id TYPE BIGINT;
+ALTER TABLE uploaded_datasets ALTER COLUMN dataset_id TYPE BIGINT;
+ALTER TABLE customers ALTER COLUMN customer_id TYPE BIGINT;
+ALTER TABLE customer_behavior ALTER COLUMN behavior_id TYPE BIGINT;
+ALTER TABLE customer_segments ALTER COLUMN segment_id TYPE BIGINT;
+ALTER TABLE campaigns ALTER COLUMN campaign_id TYPE BIGINT;
+ALTER TABLE campaign_responses ALTER COLUMN response_id TYPE BIGINT;
+ALTER TABLE predictions ALTER COLUMN prediction_id TYPE BIGINT;
+ALTER TABLE campaign_outcomes ALTER COLUMN outcome_id TYPE BIGINT;
+ALTER TABLE model_metrics ALTER COLUMN metric_id TYPE BIGINT;
+ALTER TABLE retraining_logs ALTER COLUMN log_id TYPE BIGINT;
+ALTER TABLE ai_insights ALTER COLUMN insight_id TYPE BIGINT;

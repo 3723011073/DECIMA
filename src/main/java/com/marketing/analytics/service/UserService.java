@@ -91,13 +91,12 @@ public class UserService {
             throw new IllegalArgumentException("User with this email already exists");
         }
 
-        // Determine role
-        User.Role role = User.Role.ANALYST; // Default role
+        User.Role role = User.Role.COMPANY_OWNER;
         if (registerRequest.getRole() != null && !registerRequest.getRole().isEmpty()) {
             try {
                 role = User.Role.valueOf(registerRequest.getRole().toUpperCase());
             } catch (IllegalArgumentException e) {
-                log.warn("Invalid role provided: {}. Defaulting to ANALYST", registerRequest.getRole());
+                log.warn("Invalid role provided: {}. Defaulting to COMPANY_OWNER", registerRequest.getRole());
             }
         }
 
@@ -106,7 +105,7 @@ public class UserService {
                 .name(registerRequest.getName())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .role(role)
-                .isActive(true)
+                .status("ACTIVE")
                 .build();
 
         User savedUser = userRepository.save(user);

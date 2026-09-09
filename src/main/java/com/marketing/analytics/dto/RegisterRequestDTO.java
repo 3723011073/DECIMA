@@ -3,7 +3,11 @@ package com.marketing.analytics.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -27,5 +31,9 @@ public class RegisterRequestDTO {
     @NotBlank(message = "Confirm password is required")
     private String confirmPassword;
 
-    private String role; // Optional, defaults to ANALYST if not provided
+    private String role;
+
+    private String companyId;
+
+    private String systemAdminKey;
 }

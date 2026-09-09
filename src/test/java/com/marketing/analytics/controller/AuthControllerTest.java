@@ -45,7 +45,9 @@ class AuthControllerTest {
                 "Test User",
                 "Password123",
                 "Password123",
-                "ANALYST"
+                "COMPANY_OWNER",
+                null,
+                null
         );
 
         mockMvc.perform(post("/api/v1/auth/register")

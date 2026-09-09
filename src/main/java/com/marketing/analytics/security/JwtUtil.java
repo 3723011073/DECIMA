@@ -1,18 +1,21 @@
 package com.marketing.analytics.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -29,6 +32,10 @@ public class JwtUtil {
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    private JwtParser getParser() {
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build();
     }
 
     public String generateAccessToken(UserDetails userDetails) {
@@ -63,12 +70,10 @@ public class JwtUtil {
 
     public boolean isTokenValid(String token) {
         try {
-            Jwts.parser()
-                    .setSigningKey(getSigningKey())
-                    .parseClaimsJws(token);
+            getParser().parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
-            log.error("Token validation failed: {}", e.getMessage());
+        } catch (Exception ex) {
+            log.error("Token validation failed: {}", ex.getMessage());
             return false;
         }
     }
@@ -76,8 +81,8 @@ public class JwtUtil {
     public boolean isTokenExpired(String token) {
         try {
             return extractAllClaims(token).getExpiration().before(new Date());
-        } catch (Exception e) {
-            log.error("Error checking token expiration: {}", e.getMessage());
+        } catch (Exception ex) {
+            log.error("Error checking token expiration: {}", ex.getMessage());
             return true;
         }
     }
@@ -86,20 +91,20 @@ public class JwtUtil {
         if (!isTokenValid(refreshToken)) {
             throw new IllegalArgumentException("Invalid or expired refresh token");
         }
-        
+
         String username = extractUsername(refreshToken);
         Map<String, Object> claims = new HashMap<>();
         claims.put("refreshed", true);
-        
+
         return createToken(claims, username, expiration);
     }
 
     public Long getTokenExpirationTime(String token) {
         try {
-            Date expiration = extractAllClaims(token).getExpiration();
-            return expiration.getTime();
-        } catch (Exception e) {
-            log.error("Error extracting token expiration: {}", e.getMessage());
+            Date expiryDate = extractAllClaims(token).getExpiration();
+            return expiryDate.getTime();
+        } catch (Exception ex) {
+            log.error("Error extracting token expiration: {}", ex.getMessage());
             return 0L;
         }
     }
@@ -108,16 +113,13 @@ public class JwtUtil {
         try {
             Claims claims = extractAllClaims(token);
             return (String) claims.get("role");
-        } catch (Exception e) {
-            log.error("Error extracting role from token: {}", e.getMessage());
+        } catch (Exception ex) {
+            log.error("Error extracting role from token: {}", ex.getMessage());
             return "";
         }
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(getSigningKey())
-                .parseClaimsJws(token)
-                .getBody();
+        return getParser().parseClaimsJws(token).getBody();
     }
 }

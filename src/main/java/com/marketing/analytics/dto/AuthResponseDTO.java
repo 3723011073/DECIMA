@@ -13,7 +13,10 @@ public class AuthResponseDTO {
     private String email;
     private String name;
     private String role;
+    private String companyId;
+    private String status;
     private String accessToken;
     private String refreshToken;
+    private String tokenType;
     private Long expiresIn;
 }

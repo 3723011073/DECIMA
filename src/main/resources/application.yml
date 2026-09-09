@@ -4,35 +4,39 @@ spring:
   
   # Database Configuration
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=PostgreSQL
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/marketing_analytics_db}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_PASSWORD:root123}
+    driver-class-name: org.postgresql.Driver
   
   # JPA/Hibernate Configuration
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
   
   # Flyway Configuration (Database migrations)
   flyway:
-    enabled: false
+    enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
   
 server:
-  port: 8080
+  port: 8081
 
 # JWT Configuration
 jwt:
   secret: your-secret-key-change-in-production-minimum-256-characters-long-key-value
   expiration: 86400000  # 24 hours in milliseconds
   refresh-expiration: 604800000  # 7 days in milliseconds
+
+# Required only when registering a SYSTEM_ADMIN account
+registration:
+  system-admin-key: ${SYSTEM_ADMIN_REGISTRATION_KEY:}
 
 # ML Service Configuration
 ml-service:
